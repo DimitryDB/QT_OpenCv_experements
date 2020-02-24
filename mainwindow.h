@@ -10,13 +10,11 @@
 #include <QStatusBar>
 #include <QAction>
 #include <QToolBar>
-#include <QFileDialog>
-#include <QStringList>
-#include <Qt>
-#include <QMessageBox>
-#include <QRegExp>
 #include <QGraphicsPixmapItem>
-#include <QDebug>
+#include <QMap>
+
+#include "editor_plugin_interface.h"
+
 
 class MainWindow :public QMainWindow  {
     Q_OBJECT
@@ -26,6 +24,7 @@ public:
 
     ~MainWindow() ;
 private slots:
+    void pluginPerform();
     void openImage();
     void zoomIn();
     void zoomOut();
@@ -35,19 +34,26 @@ private slots:
     void saveAs();
     void prevImage();
     void nextImage();
+    void blur();
+    void undo();
 private:
     void initUI();
     void createActions();
     void setupShortcuts();
     void showImage(QString Path);
+    void loadPlugins();
+
 
 
 private:
+    QMap<QString, EditorPluginInterface*> editPlugins;
     QMenu *fileMenu;
     QMenu *viewMenu;
+    QMenu *editMenu;
 
     QToolBar *fileToolBar;
     QToolBar *viewToolBar;
+    QToolBar *editToolBar;
 
     QGraphicsScene *imageScene;
     QGraphicsView *imageView;
@@ -57,6 +63,7 @@ private:
 
     QGraphicsPixmapItem *currentImage;
     QString currentImagePath;
+    QPixmap *pixmapBase;
 
     QAction *openAction;
     QAction *saveAsAction;
@@ -68,6 +75,9 @@ private:
     QAction *nextAction;
     QAction *prevAction;
     QAction *originalTransformAction;
+    QAction *undoModifications;
+
+    QAction *blurAction;
 };
 
 #endif // MAINWINDOW_H

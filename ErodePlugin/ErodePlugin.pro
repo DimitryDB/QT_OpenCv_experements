@@ -1,8 +1,7 @@
-TEMPLATE = app
-TARGET = ImageEditor
-QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+TEMPLATE = lib
+TARGET = ErodePlugin
+CONFIG += plugin
 
 CONFIG += c++11
 
@@ -18,12 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+    ErodePlugin.cpp
 
 HEADERS += \
-    editor_plugin_interface.h \
-    mainwindow.h
+    ErodePlugin.h
+
+INCLUDEPATH +=..
+
+DISTFILES +=
 
 #OpenCV path
 unix: !mac {
@@ -34,3 +35,4 @@ win32 {
        INCLUDEPATH += c:/path/to/opencv/include/opencv4
        LIBS += -lc:/path/to/opencv/lib/opencv_world
    }
+
