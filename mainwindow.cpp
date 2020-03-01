@@ -244,7 +244,6 @@ void MainWindow::prevImage() {
     QStringList nameFilters;
     nameFilters << "*.png" << "*.bmp" << "*.jpg";
     QStringList fileNames = dir.entryList(nameFilters, QDir::Files, QDir::Name);
-    ;
     int idx = fileNames.indexOf(QRegExp(QRegExp::escape(current.fileName())));
     if (idx == 1)
        prevAction->setEnabled(false);
